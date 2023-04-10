@@ -67,6 +67,12 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
+		<dependency>
+			    <groupId>br.com.itads.snackshare</groupId>
+    			<artifactId>commons</artifactId>
+    			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>  
   
 </project>

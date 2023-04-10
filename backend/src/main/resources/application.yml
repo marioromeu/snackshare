@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 7001
     
 spring:
   application:
@@ -23,8 +23,8 @@ logging:
 redis:
   host: ${REDIS_HOST:127.0.0.1}
   port: 6379
-  
+
 snackshare:
   payments:
     url:
-      picpay : http://www.picpay.com.br/ 
+      picpay : http://www.picpay.com.br/
