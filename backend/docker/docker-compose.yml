@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    hostname: mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: snackshare
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning #--requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/data
+      
+volumes:
+  cache:
+    driver: local
