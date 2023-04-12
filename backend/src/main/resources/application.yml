@@ -11,6 +11,13 @@ logging:
 
 snackshare:
   payments:
+
+    pix:
+      receiver:
+       name: Mário Romeu da Silva Junior
+       city: Salvador
+       pix-key: 02525440560
+
     security:
       ssl-certificate-full-path-and-name: trust.jks
 

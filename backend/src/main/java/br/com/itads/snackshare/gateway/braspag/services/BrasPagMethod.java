@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.gateway.PaymentsMethod;
 import br.com.itads.snackshare.gateway.braspag.dto.BrasPagRequestDTO;
-import br.com.itads.snackshare.gateway.braspag.dto.BrasPagResponseDTO;
 import br.com.itads.snackshare.gateway.braspag.model.Customer;
 import br.com.itads.snackshare.gateway.braspag.model.Payment;
 
@@ -37,14 +37,16 @@ public class BrasPagMethod extends PaymentsMethod {
 	/**
 	 * 
 	 */
-	public String generatePaymentsLink() {
+	@Override
+	public String generatePaymentsLink(Double value) {
+		//TODO colocar o valor do recebimento no formato do BrasPag
 		return url;
 	}
 
 	/**
 	 * 
 	 */
-	public Object sendPaymentsOrder(RefundsDTO dto) {
+	public RefundsResponse sendPaymentsOrder(RefundsDTO dto) {
 		
 		Customer customer = generateCustomer(dto);
 		
@@ -57,10 +59,10 @@ public class BrasPagMethod extends PaymentsMethod {
 					.payment(payment)
 					.build();
 		
-		ResponseEntity<BrasPagResponseDTO> response = 
-				template.postForEntity(url, brasPagRequestDTO, BrasPagResponseDTO.class);
+		ResponseEntity<RefundsResponse> response = 
+				template.postForEntity(url, brasPagRequestDTO, RefundsResponse.class);
 		
-		return response;
+		return response.getBody();
 	}
 
 	/**

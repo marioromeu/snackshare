@@ -3,6 +3,7 @@ package br.com.itads.snackshare.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.gateway.PaymentsMethod;
 
@@ -15,6 +16,9 @@ import br.com.itads.snackshare.gateway.PaymentsMethod;
 @Service
 public class RefundService {
 
+	/**
+	 * 
+	 */
 	@Autowired
 	private PaymentsMethod method;
 	
@@ -23,14 +27,10 @@ public class RefundService {
 	 * @param method
 	 * @return
 	 */
-	public String generateRefundLink(RefundsDTO dto) {
+	public RefundsResponse generateRefundLink(RefundsDTO dto) {
 
-		method.generatePaymentsLink();
-		
-		method.sendPaymentsOrder(dto);
-		
-		return "";
-		
+		return method.sendPaymentsOrder(dto);
+
 	}
 	
 }

@@ -2,6 +2,7 @@ package br.com.itads.snackshare.gateway.picpay.service;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.gateway.PaymentsMethod;
 
@@ -22,7 +23,9 @@ public class PicPayMethod extends PaymentsMethod {
 	/**
 	 * 
 	 */
-	public String generatePaymentsLink() {
+	@Override
+	public String generatePaymentsLink(Double value) {
+		//TODO colocar o valor do recebimento no formato do PicPay
 		return url;
 	}
 
@@ -30,7 +33,7 @@ public class PicPayMethod extends PaymentsMethod {
 	 * 
 	 */
 	@Override
-	public Object sendPaymentsOrder(RefundsDTO dto) {
+	public RefundsResponse sendPaymentsOrder(RefundsDTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}

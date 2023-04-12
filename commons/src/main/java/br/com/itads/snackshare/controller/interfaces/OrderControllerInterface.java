@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import br.com.itads.snackshare.controller.requests.RefundsRequest;
 import br.com.itads.snackshare.controller.requests.SnackRequest;
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.controller.responses.SnackResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -57,4 +59,36 @@ public interface OrderControllerInterface extends BaseUrlInterface {
 			@RequestHeader(value = "header", required = true) MultiValueMap<String, String> header,
 			@Parameter(in = ParameterIn.DEFAULT, description = "Request Body for command callback", required = true, schema = @Schema()) @Valid @RequestBody SnackRequest body);
 
+	/**
+	 * 
+	 * @param header
+	 * @param body
+	 * @return
+	 */
+	@Operation(summary = "Delivery a Payment Method (QRCode for example) for each member of sharing group", description = "", tags = {})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "403", description = "Forbidden", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "503", description = "Service Unavailable", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
+
+			@ApiResponse(responseCode = "504", description = "Gateway Timeout", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))) }
+	)
+	
+			@PostMapping(value = "/refunds", produces = { "application/json" }, consumes = {"application/json" })
+
+	
+	ResponseEntity<RefundsResponse> getRefundMethod(
+			MultiValueMap<String, String> header,
+			@Valid RefundsRequest body);
+	
 }

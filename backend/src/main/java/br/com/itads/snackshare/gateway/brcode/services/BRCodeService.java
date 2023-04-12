@@ -1,10 +1,15 @@
 package br.com.itads.snackshare.gateway.brcode.services;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
+import br.com.itads.snackshare.dto.ResponseDTO;
 import br.com.itads.snackshare.gateway.PaymentsMethod;
-import br.com.itads.snackshare.gateway.brcode.dto.BRCodeResponseDTO;
 
 /**
  * 
@@ -17,17 +22,20 @@ public class BRCodeService extends PaymentsMethod {
 	/**
 	 * 
 	 */
-	private String name = "Mário Romeu";
+	@Value("${snackshare.payments.pix.receiver.name}")
+	private String name;
 	
 	/**
 	 * 
 	 */
-	private String city = "Salvador";
+	@Value("${snackshare.payments.pix.receiver.city}")
+	private String city;
 	
 	/**
 	 * 
 	 */
-	private String pixKey = "02525440560";
+	@Value("${snackshare.payments.pix.receiver.pix-key}")
+	private String pixKey;
 
 	/**
 	 * 
@@ -46,7 +54,8 @@ public class BRCodeService extends PaymentsMethod {
 	 * 
 	 */
 	@Override
-	public String generatePaymentsLink() {		
+	public String generatePaymentsLink(Double value) {	
+		//TODO colocar o preço
 		return url+"?nome="+name+"&cidade="+city+"&saida=qr&chave="+pixKey;
 	}
 
@@ -54,11 +63,29 @@ public class BRCodeService extends PaymentsMethod {
 	 * 
 	 */
 	@Override
-	public Object sendPaymentsOrder(RefundsDTO dto) {
-
-		String urlToQrCode = generatePaymentsLink();
+	public RefundsResponse sendPaymentsOrder(RefundsDTO dto) {
 		
-		return template.postForEntity(urlToQrCode, null, BRCodeResponseDTO.class);
+		Map<String, Object> qrCodeMap = new HashMap<String, Object>();
+		
+		for (Map.Entry<String, ResponseDTO> entry : dto.getSharedValue().entrySet()) {
+			String key = entry.getKey();
+			ResponseDTO val = entry.getValue();
+
+			String urlToQrCode = generatePaymentsLink(val.getSharedValueByOwner());
+			
+			ResponseEntity<Object> qrCode = template.getForEntity(urlToQrCode, Object.class);
+
+			qrCodeMap.put(key, qrCode);
+			
+		}
+
+		RefundsResponse response = 
+				RefundsResponse.builder()
+							.qrCodeMap(qrCodeMap)
+							.build();
+
+		return response;
+
 	}
 
 	/**

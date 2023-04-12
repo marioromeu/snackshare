@@ -3,6 +3,7 @@ package br.com.itads.snackshare.gateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.gateway.pool.RestTemplateFactory;
 
@@ -37,13 +38,13 @@ public abstract class PaymentsMethod {
 	 * 
 	 * @return
 	 */
-	public abstract String generatePaymentsLink();
+	public abstract String generatePaymentsLink(Double value);
 
 	/**
 	 * 
 	 * @return
 	 */
-	public abstract Object sendPaymentsOrder (RefundsDTO dto);
+	public abstract RefundsResponse sendPaymentsOrder (RefundsDTO dto);
 
 	/**
 	 * 
