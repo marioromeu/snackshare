@@ -51,13 +51,13 @@ public interface OrderControllerInterface extends BaseUrlInterface {
 			@ApiResponse(responseCode = "503", description = "Service Unavailable", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SnackResponse.class))),
 
 			@ApiResponse(responseCode = "504", description = "Gateway Timeout", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SnackResponse.class))) }
-	)
-	
-			@PostMapping(value = "/order", produces = { "application/json" }, consumes = {"application/json" })
-
+	)	
+	@PostMapping(value = "/order", produces = { "application/json" }, consumes = {"application/json" })
 	ResponseEntity<SnackResponse> processOrder(
 			@RequestHeader(value = "header", required = true) MultiValueMap<String, String> header,
-			@Parameter(in = ParameterIn.DEFAULT, description = "Request Body for command callback", required = true, schema = @Schema()) @Valid @RequestBody SnackRequest body);
+			@Parameter(in = ParameterIn.DEFAULT, description = "Request Body", required = true, schema = @Schema()) 
+			@Valid 
+			@RequestBody SnackRequest body);
 
 	/**
 	 * 
@@ -82,13 +82,12 @@ public interface OrderControllerInterface extends BaseUrlInterface {
 			@ApiResponse(responseCode = "503", description = "Service Unavailable", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))),
 
 			@ApiResponse(responseCode = "504", description = "Gateway Timeout", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RefundsResponse.class))) }
-	)
-	
-			@PostMapping(value = "/refunds", produces = { "application/json" }, consumes = {"application/json" })
-
-	
+	)	
+	@PostMapping(value = "/refunds", produces = { "application/json" }, consumes = {"application/json" })	
 	ResponseEntity<RefundsResponse> getRefundMethod(
-			MultiValueMap<String, String> header,
-			@Valid RefundsRequest body);
+			@RequestHeader(value = "header", required = true) MultiValueMap<String, String> header,			
+			@Parameter(in = ParameterIn.DEFAULT, description = "Request Body", required = true, schema = @Schema()) 
+			@Valid 
+			@RequestBody RefundsRequest body);	
 	
 }

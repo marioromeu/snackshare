@@ -61,11 +61,13 @@ public class OrderController implements OrderControllerInterface {
 	/**
 	 * 
 	 */
+	@Override
 	public ResponseEntity<RefundsResponse> getRefundMethod(
 			MultiValueMap<String, String> header,
 			@Valid RefundsRequest body) {
 
-		RefundsDTO dto = RefundsDTO.builder()				
+		RefundsDTO dto = RefundsDTO.builder()
+				.sharedValue(body.getSharedValue())
 				.build();
 		
 		RefundsResponse response = refundService.generateRefundLink(dto); 

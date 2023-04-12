@@ -1,6 +1,7 @@
 package br.com.itads.snackshare.gateway.pool;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -23,9 +24,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -34,7 +36,7 @@ import org.springframework.web.client.RestTemplate;
  * @email mario.romeu@gmail.com
  *
  */
-@Component
+@Service
 public class RestTemplateFactory implements ConnectionFactoryInterface {
 
 	/**
@@ -45,19 +47,13 @@ public class RestTemplateFactory implements ConnectionFactoryInterface {
 	/**
 	 * 
 	 */
-	@Value("${snackshare.payments.security.ssl-certificate-full-path-and-name}")
+	@Value("${snackshare.payments.brcode.security.ssl-certificate-full-path-and-name}")
 	String sslCertificate;
 
 	/**
 	 * Instância do Pool de HttpClient
 	 */
 	private PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-
-	/**
-	 * Construtor privado para impedir novas instanciações externas
-	 */
-	private RestTemplateFactory() {
-	}
 
 	/**
 	 * 
@@ -72,8 +68,13 @@ public class RestTemplateFactory implements ConnectionFactoryInterface {
 		 * Novo restTemplate para o pool
 		 */
 		RestTemplate templateFromPool = new RestTemplateBuilder().rootUri(url)
-				.messageConverters(new StringHttpMessageConverter(), new MappingJackson2HttpMessageConverter())
-				.requestFactory(() -> new HttpComponentsClientHttpRequestFactory(httpClient)).build();
+				.messageConverters(
+						new StringHttpMessageConverter(), 
+						new MappingJackson2HttpMessageConverter(), 
+						new ByteArrayHttpMessageConverter() //para o qrCode
+				)
+				.requestFactory(() -> new HttpComponentsClientHttpRequestFactory(httpClient))
+				.build();
 
 		return templateFromPool;
 	}
@@ -127,14 +128,16 @@ public class RestTemplateFactory implements ConnectionFactoryInterface {
 		KeyStore trustKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());
 		trustKeyStore.load(null);// Make an empty store
 
-		InputStream fis = new FileInputStream(sslCertificate);
+		File f = new File(sslCertificate);
+		System.out.println(f.list());
+		InputStream fis = new FileInputStream(f);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 
 		CertificateFactory cf = CertificateFactory.getInstance("X.509");
 
 		while (bis.available() > 0) {
 			Certificate cert = cf.generateCertificate(bis);
-			trustKeyStore.setCertificateEntry("oam" + bis.available(), cert);
+			trustKeyStore.setCertificateEntry("snackshare" + bis.available(), cert);
 			log.debug("CERTIFICATE [" + cert + "]");
 		}
 

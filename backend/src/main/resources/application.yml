@@ -11,25 +11,25 @@ logging:
 
 snackshare:
   payments:
-
     pix:
       receiver:
-       name: Mário Romeu da Silva Junior
+       name: Mario Romeu da Silva Junior
        city: Salvador
-       pix-key: 02525440560
-
-    security:
-      ssl-certificate-full-path-and-name: trust.jks
-
+       pix: mario.romeu@gmail.com
     picpay:
-      url: https://appws.picpay.com/ecommerce/public/
+      security:
+        ssl-certificate-full-path-and-name: trust.jks
+      url: https://appws.picpay.com/ecommerce/public/      
       x-picpay-token: 0
       x-seller-token: 0
-
     brcode:
-      url: https://gerarqrcodepix.com.br/api/v1/
-
+      security:
+        ssl-certificate-full-path-and-name: src/main/resources/gerarqrcodepix.cert
+      url: 
+        service: https://gerarqrcodepix.com.br/api/v1/
     braspag:
+      security:
+        ssl-certificate-full-path-and-name: trust.jks
       url:
         service: https://apisandbox.braspag.com.br/v2/sales/
         search: https://apiquerysandbox.braspag.com.br/v2/sales/

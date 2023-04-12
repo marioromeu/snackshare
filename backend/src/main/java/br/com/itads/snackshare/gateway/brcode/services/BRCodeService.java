@@ -1,10 +1,13 @@
 package br.com.itads.snackshare.gateway.brcode.services;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
@@ -17,6 +20,7 @@ import br.com.itads.snackshare.gateway.PaymentsMethod;
  * @email mario.romeu@gmail.com
  *
  */
+@Service
 public class BRCodeService extends PaymentsMethod {
 
 	/**
@@ -34,29 +38,22 @@ public class BRCodeService extends PaymentsMethod {
 	/**
 	 * 
 	 */
-	@Value("${snackshare.payments.pix.receiver.pix-key}")
-	private String pixKey;
+	@Value("${snackshare.payments.pix.receiver.pix}")
+	private String pix;
 
 	/**
 	 * 
 	 */
 	@Value("${snackshare.payments.brcode.url.service}")
-	private String url;	
-	
-	/**
-	 * 
-	 */
-	public BRCodeService() {
-		init(url);
-	}
-	
+	private String url;
+
 	/**
 	 * 
 	 */
 	@Override
 	public String generatePaymentsLink(Double value) {	
 		//TODO colocar o preço
-		return url+"?nome="+name+"&cidade="+city+"&saida=qr&chave="+pixKey;
+		return url+"?nome="+name+"&cidade="+city+"&saida=qr&chave="+pix;
 	}
 
 	/**
@@ -64,7 +61,9 @@ public class BRCodeService extends PaymentsMethod {
 	 */
 	@Override
 	public RefundsResponse sendPaymentsOrder(RefundsDTO dto) {
-		
+
+		init(url);
+
 		Map<String, Object> qrCodeMap = new HashMap<String, Object>();
 		
 		for (Map.Entry<String, ResponseDTO> entry : dto.getSharedValue().entrySet()) {
@@ -73,7 +72,22 @@ public class BRCodeService extends PaymentsMethod {
 
 			String urlToQrCode = generatePaymentsLink(val.getSharedValueByOwner());
 			
-			ResponseEntity<Object> qrCode = template.getForEntity(urlToQrCode, Object.class);
+			File qrCode = null;
+			
+			try {
+			
+				byte[] byteArray = template.getForObject(urlToQrCode, byte[].class);
+			
+				qrCode = byteArrayConverterToQrCodeImage(byteArray);
+			
+			/**
+			 * org.springframework.web.client.UnknownContentTypeException: Could not extract response: no suitable HttpMessageConverter found for response type [class java.lang.Object] and content type [image/png]
+			 */
+			}catch (Exception e) {
+				
+				e.printStackTrace();
+
+			}
 
 			qrCodeMap.put(key, qrCode);
 			
@@ -86,6 +100,32 @@ public class BRCodeService extends PaymentsMethod {
 
 		return response;
 
+	}
+
+	/**
+	 * 
+	 * @param array
+	 * @return
+	 */
+	private File byteArrayConverterToQrCodeImage(byte[] array) {
+
+		File outputFile = null;
+		
+		try {
+			
+			outputFile = File.createTempFile("outputFile",".png");
+			
+			FileOutputStream outputStream = new FileOutputStream(outputFile);
+
+		    outputStream.write(array);
+		    
+		    System.out.println(outputFile.getAbsolutePath());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return outputFile;
 	}
 
 	/**

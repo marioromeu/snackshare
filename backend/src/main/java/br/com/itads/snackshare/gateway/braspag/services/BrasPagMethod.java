@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
@@ -21,18 +20,11 @@ import br.com.itads.snackshare.gateway.braspag.model.Payment;
  * https://braspag.github.io//en/manual/braspag-pagador
  *
  */
-@Service
+//@Service
 public class BrasPagMethod extends PaymentsMethod {
 
 	@Value("${snackshare.payments.braspag.url.service}")
 	private String url;	
-
-	/**
-	 * 
-	 */
-	public BrasPagMethod() {
-		init(url);
-	}
 	
 	/**
 	 * 
@@ -47,6 +39,8 @@ public class BrasPagMethod extends PaymentsMethod {
 	 * 
 	 */
 	public RefundsResponse sendPaymentsOrder(RefundsDTO dto) {
+		
+		init(url);
 		
 		Customer customer = generateCustomer(dto);
 		
