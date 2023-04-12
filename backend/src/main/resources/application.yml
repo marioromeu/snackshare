@@ -5,26 +5,26 @@ spring:
   application:
     name: snackshare
 
-  datasource:
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/snackshare}
-    username: root
-    password:
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL57Dialect
-
 logging:
   level:
-    root: INFO
-    
-redis:
-  host: ${REDIS_HOST:127.0.0.1}
-  port: 6379
+    root: DEBUG
 
 snackshare:
   payments:
-    url:
-      picpay : http://www.picpay.com.br/
+    security:
+      ssl-certificate-full-path-and-name: trust.jks
+
+    picpay:
+      url: https://appws.picpay.com/ecommerce/public/
+      x-picpay-token: 0
+      x-seller-token: 0
+
+    brcode:
+      url: https://gerarqrcodepix.com.br/api/v1/
+
+    braspag:
+      url:
+        service: https://apisandbox.braspag.com.br/v2/sales/
+        search: https://apiquerysandbox.braspag.com.br/v2/sales/
+      merchantId: 0f8557f2-6a0f-4a70-a25b-5aabcbae845a
+      merchantKey: UAVYJXUURHGSYPSHTNJBXTPSEOGUGJQZPBOJRPCN
