@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.itads.snackshare.model.Item;
 import br.com.itads.snackshare.model.Order;
 
 /**
@@ -28,32 +29,46 @@ public interface OrderControllerInterface extends GenericControllerInterface {
 	 * @return
 	 */
 	@RequestMapping(value = "/newOrder", method = RequestMethod.GET)
-	public ModelAndView newOrder(
-			HttpSession session,
-			@Validated @ModelAttribute("order") Order order, 
-			BindingResult result,			
-			ModelMap model);
+	public ModelAndView newOrder(HttpSession session, 
+			@Validated @ModelAttribute("item") Item item,
+			@ModelAttribute("order") Order order,
+			BindingResult result, ModelMap model);
 	
 	/**
 	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/listOrder", method = RequestMethod.GET)
-	public ModelAndView listOrder(
-			HttpSession session,
-			@Validated @ModelAttribute("orders") List<Order> orders, 
-			BindingResult result,			
-			ModelMap model);	
+	public ModelAndView listOrder(HttpSession session, 
+			@Validated 
+			@ModelAttribute("orders") List<Order> orders,
+			BindingResult result, ModelMap model);	
 
 	/**
 	 * 
 	 * @return
 	 */
 	@PostMapping(value = "/processOrder")
-	public ModelAndView processOrder(
-			HttpSession session,
-			@Validated @ModelAttribute("order") Order order, 
-			BindingResult result,			
-			ModelMap model);
+	public ModelAndView processOrder(HttpSession session, 
+			@Validated @ModelAttribute("item") Item item, 
+			@ModelAttribute("order") Order order,
+			BindingResult result, ModelMap model);
+	
+	/**
+	 * 
+	 */
+	@PostMapping(value = "/saveOrUpdateItemOnOrder")
+	public ModelAndView saveOrUpdateItemOnOrder(HttpSession session,
+			@Validated @ModelAttribute("item") Item item,
+			BindingResult result, ModelMap model);
+	
+	
+	/**
+	 * 
+	 */
+	@PostMapping(value = "/removeItemOnOrder")
+	public ModelAndView removeItemOnOrder(HttpSession session,
+			@Validated @ModelAttribute("item") Item item,
+			BindingResult result, ModelMap model);	
 
 }

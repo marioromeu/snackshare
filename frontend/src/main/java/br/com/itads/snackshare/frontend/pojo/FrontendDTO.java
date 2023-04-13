@@ -1,8 +1,7 @@
-package br.com.itads.snackshare.controller.responses;
+package br.com.itads.snackshare.frontend.pojo;
 
-import java.io.Serializable;
-import java.util.Map;
-
+import br.com.itads.snackshare.controller.responses.RefundsResponse;
+import br.com.itads.snackshare.controller.responses.SnackResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,16 +19,16 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RefundsResponse implements Serializable {
+public class FrontendDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7802938266022110750L;
+	private SnackResponse snackResponse;
 	
 	/**
 	 * 
 	 */
-	private Map<String, Object> qrCodeMap;  	
+	private RefundsResponse refundsResponse;
 	
 }

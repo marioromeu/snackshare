@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Map;
 
 import br.com.itads.snackshare.dto.ResponseDTO;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -17,6 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SnackResponse implements Serializable {
 
 	/**

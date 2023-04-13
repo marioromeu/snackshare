@@ -82,7 +82,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
 		System.out.println("Passei aqui");
 
-		//isValid(request, response, null);
+		isValid(request, response, null);
 
 	}
 
@@ -112,7 +112,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
 		System.out.println("Passei aqui");
 
-		//isValid(request, response, null);
+		isValid(request, response, null);
 
 	}	
 

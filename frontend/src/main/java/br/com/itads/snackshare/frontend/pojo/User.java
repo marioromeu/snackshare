@@ -13,7 +13,8 @@ import lombok.Setter;
 
 /**
  * 
- * @author mario.s.junior
+ * @author marioromeu
+ * @email mario.romeu@gmail.com
  *
  */
 @Getter

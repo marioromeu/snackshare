@@ -1,5 +1,7 @@
 package br.com.itads.snackshare.model;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +19,18 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Item implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7770736863897861389L;
+
+	/**
+	 * 
+	 */
+	private String id;	
+	
 	/**
 	 * 
 	 */

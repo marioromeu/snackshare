@@ -11,7 +11,6 @@ import br.com.itads.snackshare.controller.responses.SnackResponse;
 import br.com.itads.snackshare.dto.OrderDTO;
 import br.com.itads.snackshare.dto.ResponseDTO;
 import br.com.itads.snackshare.model.Item;
-import br.com.itads.snackshare.model.Order;
 import br.com.itads.snackshare.services.interfaces.OrderServiceInterface;
 
 /**
@@ -106,10 +105,14 @@ public class OrderService implements OrderServiceInterface {
 
 		Double extraValue = 0d;
 		
-		for (Item item : dto.getOrder().getItemList()) {
+		for (Map.Entry<String, Item> entry : dto.getOrder().getItemMap().entrySet()) {
+
+			Item item = entry.getValue();
+
 			if (item.getName().equals(valueType)) {
 				extraValue = (item.getValue() * item.getSignal());
 			}
+
 		}
 		
 		for (Map.Entry<String, ResponseDTO> entry : resultShared.entrySet()) {
@@ -132,11 +135,11 @@ public class OrderService implements OrderServiceInterface {
 	private Map<String, ResponseDTO> separateItensByOwner(OrderDTO dto) {
 		
 		Map<String, ResponseDTO> resultShared = new HashMap<String, ResponseDTO>();
-		
-		Order order = dto.getOrder();
 				
-		for (Item item : order.getItemList()) {
-			
+		for (Map.Entry<String, Item> entry : dto.getOrder().getItemMap().entrySet()) {
+
+			Item item = entry.getValue();
+	
 			if (item.getOwnerEmail() != null) {
 
 				Double value = item.getValue();
