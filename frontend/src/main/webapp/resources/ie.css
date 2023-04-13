@@ -308,7 +308,7 @@ article .zilla-likes .zilla-likes-count:before {
   width: 60px;
   height: 60px;
   display: block;
-  background: url(assets/img/zillalikes-on.svg) center center no-repeat;
+  background:  center center no-repeat;
   background: url(assets/img/zillalikes-off.svg) center center no-repeat;
   margin: 0 auto -43px auto;
 }
@@ -317,7 +317,7 @@ article .zilla-likes:hover, article .zilla-likes.active {
   padding-left: 0 !important;
 }
 article .zilla-likes:hover .zilla-likes-count:before, article .zilla-likes.active .zilla-likes-count:before {
-  background: url(assets/img/zillalikes-on.svg) center center no-repeat;
+  background:  center center no-repeat;
 }
 article .zilla-likes:hover .zilla-likes-count:before {
   -webkit-animation: pulsate 1s ease-in-out;
@@ -719,7 +719,7 @@ article .zilla-likes .zilla-likes-count:before {
   width: 60px;
   height: 60px;
   display: block;
-  background: url(assets/img/zillalikes-on.svg) center center no-repeat;
+  background:  center center no-repeat;
   background: url(assets/img/zillalikes-off.svg) center center no-repeat;
   margin: 0 auto -43px auto;
 }
@@ -728,7 +728,7 @@ article .zilla-likes:hover, article .zilla-likes.active {
   padding-left: 0 !important;
 }
 article .zilla-likes:hover .zilla-likes-count:before, article .zilla-likes.active .zilla-likes-count:before {
-  background: url(assets/img/zillalikes-on.svg) center center no-repeat;
+  background:  center center no-repeat;
 }
 article .zilla-likes:hover .zilla-likes-count:before {
   -webkit-animation: pulsate 1s ease-in-out;

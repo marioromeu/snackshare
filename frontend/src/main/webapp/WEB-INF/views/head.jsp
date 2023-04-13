@@ -1,6 +1,6 @@
 	<head>
 	
-	    <title>Smart SIM - Smart Service Inventory Manager</title>
+	    <title>Snack Share - Share your Snack's costs</title>
 	
 	    <meta charset="UTF-8"/>
 	

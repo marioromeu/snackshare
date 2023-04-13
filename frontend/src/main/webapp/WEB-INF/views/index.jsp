@@ -26,7 +26,7 @@
 	
 							<div class="inner" align="center">
 
-								<img src="/resources/images/logo_smartsim.jpg" width="300" height="30"/>
+								<img src="/resources/images/logo_snackshare.png" width="300" height="30"/>
 									
 								<div class="post-content" align="center">
 

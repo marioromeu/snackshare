@@ -9,7 +9,7 @@
 	
 	        <div class="logo plain logo-left">
 	            <div class="site-title">
-	                <a href="/frontend/home" title="Go to Home">Smart SIM</a>
+	                <a href="/frontend/home" title="Go to Home">Snack Share</a>
 	            </div>
 	        </div><!-- /logo -->
 
@@ -25,84 +25,18 @@
                         <li class="menu-item">
                             <a href="/frontend/home">Inicio</a>
                         </li>
-                                               
+                        
                         <li class="menu-item">
-                            <a href="#">Monitoria</a>
+                            <a href="#">Pedido</a>
                             <ul class="sub-menu">
 								<li class="menu-item">
-                                    <a href="/frontend/dashboardOnlineServices">Dashboard</a>
+                                    <a href="/frontend/newOrder">Realizar</a>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="/frontend/goCatalog">Catalogo</a>
+								<li class="menu-item">
+                                    <a href="/frontend/findOrder">Consultar</a>
                                 </li>                                
-                                <li class="menu-item">
-                                    <a href="/frontend/goConfig">Configuracoes</a>
-                                </li>
                             </ul>
                         </li>
-                        
-                        <li class="menu-item">
-                            <a href="#">Requests</a>
-                            <ul class="sub-menu">
-								<li class="menu-item">
-                                    <a href="/frontend/dashboardRequests">Dashboard</a>
-                                </li>                            
-                             	<li class="menu-item">
-                                    <a href="/frontend/listOriginRequestsReadOnly">Requests Pendentes</a>
-                                </li>
-								<li class="menu-item">
-                                    <a href="/frontend/listOriginRequestsWithFail">Requets com Falhas</a>
-                                </li>
-								<li class="menu-item">
-                                    <a href="/frontend/listOriginRequestsLocked">Requests Bloqueadas</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-						<li class="menu-item">
-                            <a href="#">Reactor</a>
-                            <ul class="sub-menu">
-								<li class="menu-item">
-                                    <a href="/frontend/dashboardReactors">Dashboard</a>
-                                </li>                                   
-                                <li class="menu-item">
-                                    <a href="/frontend/listReactors">Reactors nao Processados</a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="/frontend/listBlockReactors">Bloqueios no Reactors</a>
-                                </li>
-                            </ul>
-                        </li>  
-                        
-                        <li class="menu-item">
-                            <a href="#">Atores</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item">
-                                    <a href="/frontend/searchActorKeys">Consulta das multiplas chaves</a>
-                                </li>
-								<li class="menu-item">
-                                    <a href="/frontend/searchActor">Consulta de inventario</a>
-                                </li>                                
-                                <!--li class="menu-item">
-                                    <a href="/frontend/listActor">Atualizar Caracteristicas</a>
-                                </li-->                          
-                            </ul>
-                        </li>
-                            
-                        <li class="menu-item">
-                            <a href="#">Impactos</a>
-                            <ul class="sub-menu">
-								<li class="menu-item">
-                                    <a href="/frontend/dashboardDelivery">Dashboard</a>
-                                </li>                                   
-                                <li class="menu-item">
-                                    <a href="/frontend/searchRequest">Listar Impactos por Request</a>
-                                </li>                            
-                                <li class="menu-item">
-                                    <a href="/frontend/listDelivery">Listar ultimos Impactos</a>
-                                </li>
-                            </ul>
-                        </li>                            
                             
                         <li class="menu-item">
                             <a href="#">Ajuda</a>
@@ -111,8 +45,6 @@
                                     <a href="/frontend/contact">Entre em Contato</a>
                                 </li>
                             </ul>                        
-                            
-                            
                         </li>
 
                     </ul>

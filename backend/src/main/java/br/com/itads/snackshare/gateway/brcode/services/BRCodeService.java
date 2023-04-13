@@ -50,10 +50,14 @@ public class BRCodeService extends PaymentsMethod {
 	/**
 	 * 
 	 */
+	private FileOutputStream outputStream;
+
+	/**
+	 * 
+	 */
 	@Override
 	public String generatePaymentsLink(Double value) {	
-		//TODO colocar o preço
-		return url+"?nome="+name+"&cidade="+city+"&saida=qr&chave="+pix;
+		return url+"?nome="+name+"&cidade="+city+"&saida=qr&chave="+pix+"&valor="+value;
 	}
 
 	/**
@@ -81,7 +85,9 @@ public class BRCodeService extends PaymentsMethod {
 				qrCode = byteArrayConverterToQrCodeImage(byteArray);
 			
 			/**
-			 * org.springframework.web.client.UnknownContentTypeException: Could not extract response: no suitable HttpMessageConverter found for response type [class java.lang.Object] and content type [image/png]
+			 * org.springframework.web.client.UnknownContentTypeException:
+			 * Could not extract response: no suitable HttpMessageConverter found for response type [class java.lang.Object] 
+			 * and content type [image/png]
 			 */
 			}catch (Exception e) {
 				
@@ -115,12 +121,10 @@ public class BRCodeService extends PaymentsMethod {
 			
 			outputFile = File.createTempFile("outputFile",".png");
 			
-			FileOutputStream outputStream = new FileOutputStream(outputFile);
+			outputStream = new FileOutputStream(outputFile);
 
 		    outputStream.write(array);
 		    
-		    System.out.println(outputFile.getAbsolutePath());
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
