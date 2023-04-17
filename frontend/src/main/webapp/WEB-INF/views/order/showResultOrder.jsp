@@ -27,6 +27,7 @@
 						<th>Itens</th>
 						<th>Total</th>
 						<th>QRCODE</th>
+						<th>BARCODE</th>
 					</tr>
 
 					<c:forEach items="${frontendDTO.snackResponse.sharedValue.entrySet()}" var="entry">
@@ -41,11 +42,20 @@
 							</td>
 
 							<td>${entry.value.sharedValueByOwner}</td>
-
+							
 							<td>
-								${frontendDTO.refundsResponse.qrCodeMap.get(entry.key)}								
-								<img src="<c:out value="${frontendDTO.refundsResponse.qrCodeMap.get(entry.key)}" />" width="180" height="180"/>								
+								<img 
+									src="data:image/gif;base64,<c:out value="${frontendDTO.refundsResponse.qrCodeMap.get(entry.key)}" />"
+									width="180" 
+									height="180"/>
 							</td>
+							
+							<td>
+								<img 
+									src="data:image/gif;base64,<c:out value="${frontendDTO.refundsResponse.barCodeMap.get(entry.key)}" />"
+									width="180" 
+									height="180"/>
+							</td>							
 
 						</tr>
 

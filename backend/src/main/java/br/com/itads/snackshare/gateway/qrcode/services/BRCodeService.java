@@ -1,15 +1,12 @@
 package br.com.itads.snackshare.gateway.qrcode.services;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import br.com.itads.snackshare.constants.SnackConstants;
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.dto.ResponseDTO;
@@ -22,7 +19,7 @@ import br.com.itads.snackshare.util.FileUtils;
  * @email mario.romeu@gmail.com
  *
  */
-@Service
+@Service("BRCodeService")
 public class BRCodeService extends PaymentsMethod {
 
 	/**
@@ -48,11 +45,12 @@ public class BRCodeService extends PaymentsMethod {
 	 */
 	@Value("${snackshare.payments.brcode.url.service}")
 	private String url;
-
+	
 	/**
 	 * 
 	 */
-	private FileOutputStream outputStream;
+	@Autowired
+	private FileUtils fileUtils;
 
 	/**
 	 * 
@@ -77,31 +75,21 @@ public class BRCodeService extends PaymentsMethod {
 			ResponseDTO val = entry.getValue();
 
 			String urlToQrCode = generatePaymentsLink(val.getSharedValueByOwner());
-			
-			File qrCode = null;
-			
+
+			byte[] byteArray = null;
+
 			try {
 			
-				byte[] byteArray = template.getForObject(urlToQrCode, byte[].class);
-			
-				qrCode = FileUtils.byteArrayConverterToQrCodeImage(
-						byteArray,
-						UUID.randomUUID().toString(),
-						SnackConstants.PNG
-				);
-			
-			/**
-			 * org.springframework.web.client.UnknownContentTypeException:
-			 * Could not extract response: no suitable HttpMessageConverter found for response type [class java.lang.Object] 
-			 * and content type [image/png]
-			 */
+				byteArray = template.getForObject(urlToQrCode, byte[].class);
+
 			}catch (Exception e) {
 				
 				e.printStackTrace();
 
 			}
 
-			qrCodeMap.put(key, qrCode);
+			//qrCodeMap.put(key, qrCode);
+			qrCodeMap.put(key, byteArray);
 			
 		}
 

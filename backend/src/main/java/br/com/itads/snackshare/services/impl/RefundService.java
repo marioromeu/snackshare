@@ -1,6 +1,7 @@
 package br.com.itads.snackshare.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
@@ -20,16 +21,45 @@ public class RefundService {
 	 * 
 	 */
 	@Autowired
-	private PaymentsMethod method;
+	@Qualifier("BRCodeService")
+	private PaymentsMethod method1;
+
+	/**
+	 * 
+	 */
+	@Autowired
+	@Qualifier("BoletoService")
+	private PaymentsMethod method2;
 	
 	/**
+	 * 
+	 * Amostra de capacidades de uso de interfaces para abstrair a 
+	 * implementacao do meio de pagamento, de forma a reduzir impactos
+	 * a cada novo meio de pagamento incorporado à solução, desde que 
+	 * respeita a interface PaymentsMethos. 
 	 * 
 	 * @param method
 	 * @return
 	 */
 	public RefundsResponse generateRefundLink(RefundsDTO dto) {
 
-		return method.sendPaymentsOrder(dto);
+		/**
+		 * Implementacao de meio de pagamento via qrcode PIX
+		 */
+		RefundsResponse refundsResponse = method1.sendPaymentsOrder(dto);
+		
+		/**
+		 * Implementacao de meio de pagamento via boleto bancario
+		 */
+		RefundsResponse refundsResponseTemp = method2.sendPaymentsOrder(dto);
+		
+		/**
+		 * Uniao dos dois resultados
+		 */
+		refundsResponse.setBarCodeMap( refundsResponseTemp.getBarCodeMap());
+		
+		
+		return refundsResponse;
 
 	}
 	

@@ -1,14 +1,13 @@
 package br.com.itads.snackshare.gateway.boleto.services;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
-import br.com.itads.snackshare.constants.SnackConstants;
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.dto.ResponseDTO;
@@ -17,12 +16,12 @@ import br.com.itads.snackshare.gateway.boleto.builder.BoletoBuilder;
 import br.com.itads.snackshare.gateway.boleto.dto.BoletoDTO;
 import br.com.itads.snackshare.model.Owner;
 import br.com.itads.snackshare.services.interfaces.UserServiceInterface;
-import br.com.itads.snackshare.util.FileUtils;
 
 /**
  * @author marioromeu
  * @email mario.romeu@gmail.com
  */
+@Service("BoletoService")
 public class BoletoService extends PaymentsMethod {
 
 	/**
@@ -52,8 +51,6 @@ public class BoletoService extends PaymentsMethod {
 			String key = entry.getKey();
 			ResponseDTO val = entry.getValue();
 			
-			File boletoOutput = null;
-			
 			Owner owner = userService.getOwnerByKey(key);
 			
 			BoletoDTO boletoDto = 
@@ -64,19 +61,15 @@ public class BoletoService extends PaymentsMethod {
 			
 			GeradorDeBoleto gerador = BoletoBuilder.generateGeradorDeBoleto(boletoDto);
 			
+			byte[] bPNG = null;
+			
 			try {
 
 		        // Para gerar um boleto em PNG  
 		        gerador.geraPNG(UUID.randomUUID()+".png");  
 
 		        // Para gerar um array de bytes a partir de um PNG  
-		        byte[] bPNG = gerador.geraPNG();				
-			
-		        boletoOutput = FileUtils.byteArrayConverterToQrCodeImage(
-		        		bPNG,
-						UUID.randomUUID().toString(),
-						SnackConstants.PNG
-				);
+		        bPNG = gerador.geraPNG();				
 
 			}catch (Exception e) {
 				
@@ -84,13 +77,14 @@ public class BoletoService extends PaymentsMethod {
 
 			}
 
-			boletoMap.put(key, boletoOutput);
+			//boletoMap.put(key, boletoOutput);
+			boletoMap.put(key, bPNG);
 			
 		}
 
 		RefundsResponse response = 
 				RefundsResponse.builder()
-							.qrCodeMap(boletoMap)
+							.barCodeMap(boletoMap)
 							.build();
 
 		return response;		

@@ -17,5 +17,7 @@ logging:
     root: INFO
 
 snackshare:
+  tmp:
+    dir: resources/tmp/
   backend: 
     url: http://localhost:7001/snackShare/

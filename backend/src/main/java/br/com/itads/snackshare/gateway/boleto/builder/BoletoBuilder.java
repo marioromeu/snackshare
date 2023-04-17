@@ -21,7 +21,7 @@ import br.com.itads.snackshare.gateway.boleto.dto.BoletoDTO;
 public class BoletoBuilder {
 
 	/**
-	 * 
+	 * nossoNumeroECodDocumento
 	 * @return
 	 */
 	public static GeradorDeBoleto generateGeradorDeBoleto(BoletoDTO dto) {
@@ -35,22 +35,23 @@ public class BoletoBuilder {
 		datas.comVencimento(date);
 
 		Endereco enderecoBeneficiario = Endereco.novoEndereco()
-				.comLogradouro("Av Beira Mar, 42")  
-				.comBairro("Ribeira")  
-				.comCep("40420-123")  
-				.comCidade("Salvador")  
-				.comUf("BA");  
+				.comLogradouro("Av. Beira Mar, 000")  
+				.comBairro("Ribeira")
+				.comCep("00000-000")
+				.comCidade("Salvador")
+				.comUf("BA");
 
 		//Quem emite o boleto
-		Beneficiario beneficiario = Beneficiario.novoBeneficiario()  
-				.comNomeBeneficiario("Mario Romeu")  
-				.comAgencia("0655").comDigitoAgencia("")  
-				.comCodigoBeneficiario("19999657")  
-				.comDigitoCodigoBeneficiario("1")  
-				.comNumeroConvenio("1207113")  
-				.comCarteira("18")
-				.comEndereco(enderecoBeneficiario)
-				.comNossoNumero("9000206");
+       Beneficiario beneficiario = Beneficiario.novoBeneficiario()  
+                .comNomeBeneficiario("Mario Romeu")  
+                .comAgencia("0000").comDigitoAgencia("0")  
+                .comCodigoBeneficiario("00000")  
+                .comDigitoCodigoBeneficiario("0")  
+                .comNumeroConvenio("0000000")  
+                .comCarteira("18")  
+                .comEndereco(enderecoBeneficiario)
+                .comNossoNumero("0000000")
+       			.comDigitoNossoNumero("0");
 
 		Endereco enderecoPagador = Endereco.novoEndereco()
 				.comLogradouro(dto.getOwner().getHomeAddress().getStreetAdress())  
@@ -74,7 +75,7 @@ public class BoletoBuilder {
 				.comPagador(pagador)  
 				.comValorBoleto(dto.getValueByOwner())  
 				.comNumeroDoDocumento("1234")  
-				.comInstrucoes("Pagar a comida :)")  
+				.comInstrucoes("Pagar a comida")  
 				.comLocaisDePagamento("Internet");  
 
 		return new GeradorDeBoleto(boleto);

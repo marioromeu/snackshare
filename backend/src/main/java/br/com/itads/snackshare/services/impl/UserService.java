@@ -1,5 +1,7 @@
 package br.com.itads.snackshare.services.impl;
 
+import org.springframework.stereotype.Service;
+
 import br.com.itads.snackshare.model.Address;
 import br.com.itads.snackshare.model.Owner;
 import br.com.itads.snackshare.services.interfaces.UserServiceInterface;
@@ -10,6 +12,7 @@ import br.com.itads.snackshare.services.interfaces.UserServiceInterface;
  * @email mario.romeu@gmail.com
  *
  */
+@Service
 public class UserService implements UserServiceInterface {
 
 	/**
@@ -27,17 +30,17 @@ public class UserService implements UserServiceInterface {
 		 */
 		
 		Address home = Address.builder()
-				.city(key)
-				.neighborhood(key)
-				.state(key)
-				.streetAdress(key)
-				.zipCode(key)
+				.city("Salvador")
+				.neighborhood("Bomfim")
+				.state("BA")
+				.streetAdress("Avenida Beira Mar")
+				.zipCode("30320230")
 				.build();
 		
 		Owner ownerMock = 
 				Owner.builder()
 					 .name(key)
-					 .document(key)
+					 .document("111.222.333-12")
 					 .email(key)
 					 .homeAddress(home)
 				.build();

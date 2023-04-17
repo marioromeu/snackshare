@@ -4,31 +4,40 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * 
  * @author marioromeu
  * @email mario.romeu@gmail.com
  *
  */
+@Component
 public class FileUtils {
 
+	@Value("${snackshare.tmp.dir}")
+	private String tempDir;
+	
 	/**
 	 * 
 	 */
-	private static FileOutputStream outputStream;	
+	private FileOutputStream outputStream;	
 	
 	/**
 	 * 
 	 * @param array
 	 * @return
 	 */
-	public static File byteArrayConverterToQrCodeImage(byte[] array, String fileName, String fileExtension) {
+	public File byteArrayConverterToQrCodeImage(byte[] array, String fileName, String fileExtension) {
 
 		File outputFile = null;
 		
 		try {
 			
-			outputFile = File.createTempFile(fileName, fileExtension);
+			File directory = new File(tempDir);
+			
+			outputFile = File.createTempFile(fileName, fileExtension, directory);
 			
 			outputStream = new FileOutputStream(outputFile);
 

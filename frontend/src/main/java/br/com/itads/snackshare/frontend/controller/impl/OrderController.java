@@ -102,6 +102,8 @@ public class OrderController extends GenericController implements OrderControlle
 
 		session.setAttribute("sessionOrder", sessionOrder);
 
+		item = null;
+		
 		return new ModelAndView("/order/newOrder", "order", sessionOrder);
 
 	}

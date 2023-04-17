@@ -30,6 +30,11 @@ public class RefundsResponse implements Serializable {
 	/**
 	 * 
 	 */
-	private Map<String, Object> qrCodeMap;  	
+	private Map<String, Object> qrCodeMap;
+	
+	/**
+	 * 
+	 */
+	private Map<String, Object> barCodeMap;	
 	
 }
