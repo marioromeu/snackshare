@@ -2,6 +2,7 @@ package br.com.itads.snackshare.frontend.services.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 
 import br.com.itads.snackshare.frontend.pojo.User;
@@ -20,8 +21,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public User saveOrUpdate(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -29,8 +29,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public User update(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -38,8 +37,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public User delete(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -47,8 +45,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public List<User> listAll(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -56,8 +53,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public User get(User t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -65,8 +61,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public User getByID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -95,8 +90,7 @@ public class AccessControlServiceImpl implements AccessControlServiceInterface {
 	 */
 	@Override
 	public void logoff(User user) {
-		// TODO Auto-generated method stub
-		
+		throw new NotImplementedException();		
 	}
 
 }

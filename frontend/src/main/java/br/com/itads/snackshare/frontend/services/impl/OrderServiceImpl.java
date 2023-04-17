@@ -3,6 +3,7 @@ package br.com.itads.snackshare.frontend.services.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -57,8 +58,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public Order saveOrUpdate(Order t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -66,8 +66,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public Order update(Order t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -75,8 +74,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public Order delete(Order t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -84,8 +82,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public List<Order> listAll(Order t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -93,8 +90,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public Order get(Order t) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -102,8 +98,7 @@ public class OrderServiceImpl implements OrderServiceInterface {
 	 */
 	@Override
 	public Order getByID(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**

@@ -50,10 +50,8 @@ public class OrderController implements OrderControllerInterface {
 				.build();
 		
 		SnackResponse response = orderService.calculateSharedValueByOwner(dto); 
-		
-		ResponseEntity<SnackResponse> entity = new ResponseEntity<SnackResponse>(response, HttpStatus.OK);
-		
-		return entity;
+
+		return new ResponseEntity<SnackResponse>(response, HttpStatus.OK);
 
 	}
 
@@ -71,10 +69,8 @@ public class OrderController implements OrderControllerInterface {
 				.build();
 		
 		RefundsResponse response = refundService.generateRefundLink(dto); 
-		
-		ResponseEntity<RefundsResponse> entity = new ResponseEntity<RefundsResponse>(response, HttpStatus.OK);
-		
-		return entity;
+
+		return new ResponseEntity<RefundsResponse>(response, HttpStatus.OK);
 
 	}	
 	

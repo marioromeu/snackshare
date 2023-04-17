@@ -3,6 +3,7 @@ package br.com.itads.snackshare.gateway.qrcode.services;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -107,8 +108,7 @@ public class BRCodeService extends PaymentsMethod {
 	 */
 	@Override
 	public Object authenticate(Object dto) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	

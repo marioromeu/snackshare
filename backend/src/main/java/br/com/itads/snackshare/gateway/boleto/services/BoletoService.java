@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,7 @@ public class BoletoService extends PaymentsMethod {
 	 */
 	@Override
 	public String generatePaymentsLink(Double value) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
 
 	/**
@@ -96,8 +96,7 @@ public class BoletoService extends PaymentsMethod {
 	 */
 	@Override
 	public Object authenticate(Object dto) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotImplementedException();
 	}
   
 }  

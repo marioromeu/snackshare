@@ -21,6 +21,13 @@ import br.com.itads.snackshare.gateway.boleto.dto.BoletoDTO;
 public class BoletoBuilder {
 
 	/**
+	 * 
+	 */
+	private BoletoBuilder() {
+		
+	}
+	
+	/**
 	 * nossoNumeroECodDocumento
 	 * @return
 	 */
