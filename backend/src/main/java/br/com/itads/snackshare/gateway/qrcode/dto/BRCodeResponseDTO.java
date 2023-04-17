@@ -1,4 +1,4 @@
-package br.com.itads.snackshare.gateway.brcode.dto;
+package br.com.itads.snackshare.gateway.qrcode.dto;
 
 import lombok.Builder;
 import lombok.Getter;

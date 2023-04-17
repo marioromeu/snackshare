@@ -1,4 +1,4 @@
-package br.com.itads.snackshare.gateway.pool;
+package br.com.itads.snackshare.pool;
 
 import java.io.BufferedInputStream;
 import java.io.File;

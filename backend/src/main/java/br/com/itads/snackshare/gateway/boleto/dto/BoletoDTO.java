@@ -1,5 +1,6 @@
-package br.com.itads.snackshare.gateway.picpay.model;
+package br.com.itads.snackshare.gateway.boleto.dto;
 
+import br.com.itads.snackshare.model.Owner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 /**
  * 
  * @author marioromeu
- * @email  mario.romeu@gmail.com
+ * @email mario.romeu@gmail.com
  *
  */
 @Getter
@@ -17,16 +18,10 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Notification {
-	
-	/**
-	 * 
-	 */
-	private String disablePush;
-	
-	/**
-	 * 
-	 */
-	private String disableEmail;
+public class BoletoDTO {
 
+	private Owner owner;
+
+	private Double valueByOwner;
+	
 }

@@ -1,18 +1,20 @@
-package br.com.itads.snackshare.gateway.brcode.services;
+package br.com.itads.snackshare.gateway.qrcode.services;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import br.com.itads.snackshare.constants.SnackConstants;
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
 import br.com.itads.snackshare.dto.ResponseDTO;
 import br.com.itads.snackshare.gateway.PaymentsMethod;
+import br.com.itads.snackshare.util.FileUtils;
 
 /**
  * 
@@ -82,7 +84,11 @@ public class BRCodeService extends PaymentsMethod {
 			
 				byte[] byteArray = template.getForObject(urlToQrCode, byte[].class);
 			
-				qrCode = byteArrayConverterToQrCodeImage(byteArray);
+				qrCode = FileUtils.byteArrayConverterToQrCodeImage(
+						byteArray,
+						UUID.randomUUID().toString(),
+						SnackConstants.PNG
+				);
 			
 			/**
 			 * org.springframework.web.client.UnknownContentTypeException:
@@ -106,30 +112,6 @@ public class BRCodeService extends PaymentsMethod {
 
 		return response;
 
-	}
-
-	/**
-	 * 
-	 * @param array
-	 * @return
-	 */
-	private File byteArrayConverterToQrCodeImage(byte[] array) {
-
-		File outputFile = null;
-		
-		try {
-			
-			outputFile = File.createTempFile("outputFile",".png");
-			
-			outputStream = new FileOutputStream(outputFile);
-
-		    outputStream.write(array);
-		    
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return outputFile;
 	}
 
 	/**

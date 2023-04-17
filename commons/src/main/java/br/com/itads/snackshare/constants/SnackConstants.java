@@ -28,4 +28,14 @@ public class SnackConstants {
 	 */
 	public static final String CUPON = "cupon";
 	
+	/**
+	 * 
+	 */
+	public static final String PNG = ".png";
+
+	/**
+	 * 
+	 */
+	public static final String PDF = ".pdf";	
+	
 }

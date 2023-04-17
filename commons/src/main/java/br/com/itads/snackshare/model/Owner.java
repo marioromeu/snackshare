@@ -23,11 +23,22 @@ public class Owner {
 	 * 
 	 */
 	private String name;
+
+	/**
+	 * 
+	 */
+	private String document;	
 	
 	/**
 	 * 
 	 */
-	private String email;	
+	private String email;
+
+	
+	/**
+	 * 
+	 */
+	private Address homeAddress;	
 	
 	/**
 	 * 

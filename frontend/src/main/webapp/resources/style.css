@@ -729,8 +729,8 @@ input[type="tel"], input[type="password"], textarea {
 input[type="submit"], button {
   -webkit-appearance: none;
   background-color: transparent;
-  font-size: 20px;
-  font-size: 2rem;
+  font-size: 10px;
+  font-size: 1rem;
 }
 
 input[type="text"]:hover, input[type="url"]:hover, input[type="email"]:hover,
@@ -2119,15 +2119,15 @@ button,
 header.header nav, .hero, #comments .url,
 .form-submit input[type="submit"],
 .widget h4 {
-  font-weight: 700;
-}
-
-.hero * {
   font-weight: 400;
 }
 
+.hero * {
+  font-weight: 300;
+}
+
 .widget h4 {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 blockquote {

@@ -5,7 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.itads.snackshare.controller.responses.RefundsResponse;
 import br.com.itads.snackshare.dto.RefundsDTO;
-import br.com.itads.snackshare.gateway.pool.RestTemplateFactory;
+import br.com.itads.snackshare.pool.RestTemplateFactory;
 
 /**
  * 

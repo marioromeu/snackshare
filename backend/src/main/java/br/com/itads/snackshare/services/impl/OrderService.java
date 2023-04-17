@@ -140,7 +140,7 @@ public class OrderService implements OrderServiceInterface {
 
 			Item item = entry.getValue();
 	
-			if (item.getOwnerEmail() != null) {
+			if (item.getOwnerEmail() != null && !item.getOwnerEmail().equals("")) {
 
 				Double value = item.getValue();
 				

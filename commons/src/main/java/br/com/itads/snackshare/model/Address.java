@@ -1,4 +1,4 @@
-package br.com.itads.snackshare.gateway.picpay.model;
+package br.com.itads.snackshare.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.Setter;
 /**
  * 
  * @author marioromeu
- * @email  mario.romeu@gmail.com
+ * @email mario.romeu@gmail.com
  *
  */
 @Getter
@@ -17,18 +17,31 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ErrorMessage {
+public class Address {
 
+	/**
+	 * 
+	 */
+	private String streetAdress;
 	
 	/**
 	 * 
 	 */
-	private String field;
-	
+	private String neighborhood;
 	
 	/**
 	 * 
 	 */
-	private String message;
+	private String zipCode;
+	
+	/**
+	 * 
+	 */
+	private String city;
+	
+	/**
+	 * 
+	 */
+	private String state;  
 	
 }
