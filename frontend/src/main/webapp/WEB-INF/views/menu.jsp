@@ -32,9 +32,9 @@
 								<li class="menu-item">
                                     <a href="/frontend/newOrder">Realizar</a>
                                 </li>
-								<li class="menu-item">
+								<!--li class="menu-item">
                                     <a href="/frontend/findOrder">Consultar</a>
-                                </li>                                
+                                </li-->                                
                             </ul>
                         </li>
                             

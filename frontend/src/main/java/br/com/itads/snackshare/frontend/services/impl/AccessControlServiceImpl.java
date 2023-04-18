@@ -10,7 +10,8 @@ import br.com.itads.snackshare.frontend.services.interfaces.AccessControlService
 
 /**
  * 
- * @author mario.s.junior
+ * @author marioromeu
+ * @email mario.romeu@gmail.com
  *
  */
 @Service

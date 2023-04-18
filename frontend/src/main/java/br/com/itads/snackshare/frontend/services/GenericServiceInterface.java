@@ -4,7 +4,8 @@ import java.util.List;
 
 /**
  * 
- * @author mario.s.junior
+ * @author marioromeu
+ * @email mario.romeu@gmail.com
  *
  * @param <T>
  */

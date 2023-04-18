@@ -46,12 +46,12 @@ public class RefundService {
 		/**
 		 * Implementacao de meio de pagamento via qrcode PIX
 		 */
-		RefundsResponse refundsResponse = method1.sendPaymentsOrder(dto);
+		RefundsResponse refundsResponse = generateRefundLinkForPixBRCode(dto);
 		
 		/**
 		 * Implementacao de meio de pagamento via boleto bancario
 		 */
-		RefundsResponse refundsResponseTemp = method2.sendPaymentsOrder(dto);
+		RefundsResponse refundsResponseTemp = generateRefundLinkForBoleto(dto);
 		
 		/**
 		 * Uniao dos dois resultados
@@ -62,5 +62,38 @@ public class RefundService {
 		return refundsResponse;
 
 	}
+
+	/**
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	public RefundsResponse generateRefundLinkForPixBRCode(RefundsDTO dto) {
+
+		/**
+		 * Implementacao de meio de pagamento via qrcode PIX
+		 */
+		RefundsResponse refundsResponse = method1.sendPaymentsOrder(dto);
+		
+		
+		return refundsResponse;
+
+	}
+	
+	/**
+	 * 
+	 * @param method
+	 * @return
+	 */
+	public RefundsResponse generateRefundLinkForBoleto(RefundsDTO dto) {
+
+		/**
+		 * Implementacao de meio de pagamento via qrcode PIX
+		 */
+		RefundsResponse refundsResponse = method2.sendPaymentsOrder(dto);
+		
+		return refundsResponse;
+
+	}	
 	
 }

@@ -31,16 +31,23 @@
 								
 								<form id="fh5co_contact_form">
 									<p>
-										<span><strong>Email:</strong> mario.s.junior@ericssoninovacao.com.br </span>
+										<span><strong>Email:</strong> mario.romeu@gmail.com </span>
 									</p>
 									<p>
 										<span><strong>Whatsapp/Telegram:</strong> +55 71 9 9700 2426 </span>
 									</p>
 									<p>
-										<span>M�rio Romeu da Silva Junior</span>
+										<span><strong>Linkedin:</strong> https://www.linkedin.com/in/marioromeu/ </span>
 									</p>
 									<p>
-										<span><strong>I.T.A.D.S.</strong> - Ericsson Inova��o S. A.</span>
+										<span><strong>GitHub:</strong> https://github.com/marioromeu </span>
+									</p>									
+									
+									<p>
+										<span>Mario Romeu da Silva Junior</span>
+									</p>
+									<p>
+										<span><strong>I.T.A.D.S.</strong></span>
 									</p>
 								</form>
 							</div>

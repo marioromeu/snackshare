@@ -10,6 +10,7 @@ import br.com.itads.snackshare.constants.SnackConstants;
 import br.com.itads.snackshare.controller.responses.SnackResponse;
 import br.com.itads.snackshare.dto.OrderDTO;
 import br.com.itads.snackshare.dto.ResponseDTO;
+import br.com.itads.snackshare.exception.EmptyOrderException;
 import br.com.itads.snackshare.model.Item;
 import br.com.itads.snackshare.services.interfaces.OrderServiceInterface;
 
@@ -24,25 +25,33 @@ public class OrderService implements OrderServiceInterface {
 	/**
 	 * 
 	 * @param dto
+	 * @throws EmptyOrderException 
 	 */
-	public SnackResponse calculateSharedValueByOwner(OrderDTO dto) {
-		
+	public SnackResponse calculateSharedValueByOwner(OrderDTO dto) throws EmptyOrderException {
+
 		SnackResponse response = SnackResponse.builder().build();
 
 		Map<String, ResponseDTO> resultShared = separateItensByOwner(dto);
-		
+
 		Double totalValue = getTotalValueOfAllItens(resultShared);
-		
-		resultShared = applyDelivery(dto, resultShared, totalValue);
-		
-		resultShared = applyCupon(dto, resultShared, totalValue);
-		
-		response.setSharedValue(resultShared);
-		
+
+		if (totalValue > 0) {
+
+			resultShared = applyDelivery(dto, resultShared, totalValue);
+
+			resultShared = applyCupon(dto, resultShared, totalValue);
+
+			response.setSharedValue(resultShared);
+
+		} else {
+			
+			throw new EmptyOrderException();
+			
+		}
+
 		return response;
-		
+
 	}
-	
 
 	/**
 	 * 
@@ -52,27 +61,28 @@ public class OrderService implements OrderServiceInterface {
 	private Double getTotalValueOfAllItens(Map<String, ResponseDTO> resultShared) {
 
 		Double totalValue = 0d;
-		
+
 		for (Map.Entry<String, ResponseDTO> entry : resultShared.entrySet()) {
 			ResponseDTO val = entry.getValue();
-			
+
 			totalValue += val.getSharedValueByOwner();
 
 		}
-		
+
 		return totalValue;
-		
-	}	
-	
+
+	}
+
 	/**
 	 * 
 	 * @param dto
 	 * @return
 	 */
-	private Map<String, ResponseDTO> applyCupon(OrderDTO dto, Map<String, ResponseDTO> resultShared, Double totalValue) {
-		
+	private Map<String, ResponseDTO> applyCupon(OrderDTO dto, Map<String, ResponseDTO> resultShared,
+			Double totalValue) {
+
 		applyExtraValue(dto, resultShared, totalValue, SnackConstants.CUPON);
-		
+
 		return resultShared;
 
 	}
@@ -82,29 +92,28 @@ public class OrderService implements OrderServiceInterface {
 	 * @param dto
 	 * @return
 	 */
-	private Map<String, ResponseDTO> applyDelivery(OrderDTO dto, Map<String, ResponseDTO> resultShared, Double totalValue) {
-		
+	private Map<String, ResponseDTO> applyDelivery(OrderDTO dto, Map<String, ResponseDTO> resultShared,
+			Double totalValue) {
+
 		applyExtraValue(dto, resultShared, totalValue, SnackConstants.DELIVERY);
-		
+
 		return resultShared;
 	}
 
 	/**
-	 * Apply an extra value (positive or negative) like (delivery or cupon of discount)
+	 * Apply an extra value (positive or negative) like (delivery or cupon of
+	 * discount)
 	 * 
 	 * @param dto
 	 * @param resultShared
 	 * @param totalValue
 	 * @param valueOfDelivery
 	 */
-	private void applyExtraValue(
-			OrderDTO dto,
-			Map<String, ResponseDTO> resultShared,
-			Double totalValue,
+	private void applyExtraValue(OrderDTO dto, Map<String, ResponseDTO> resultShared, Double totalValue,
 			String valueType) {
 
 		Double extraValue = 0d;
-		
+
 		for (Map.Entry<String, Item> entry : dto.getOrder().getItemMap().entrySet()) {
 
 			Item item = entry.getValue();
@@ -114,7 +123,7 @@ public class OrderService implements OrderServiceInterface {
 			}
 
 		}
-		
+
 		for (Map.Entry<String, ResponseDTO> entry : resultShared.entrySet()) {
 
 			ResponseDTO val = entry.getValue();
@@ -123,7 +132,7 @@ public class OrderService implements OrderServiceInterface {
 
 			Double myPercent = myBalance / totalValue;
 
-			val.setSharedValueByOwner( myBalance + (extraValue * myPercent) );
+			val.setSharedValueByOwner(myBalance + (extraValue * myPercent));
 
 		}
 	}
@@ -133,47 +142,44 @@ public class OrderService implements OrderServiceInterface {
 	 * @return
 	 */
 	private Map<String, ResponseDTO> separateItensByOwner(OrderDTO dto) {
-		
+
 		Map<String, ResponseDTO> resultShared = new HashMap<String, ResponseDTO>();
-				
+
 		for (Map.Entry<String, Item> entry : dto.getOrder().getItemMap().entrySet()) {
 
 			Item item = entry.getValue();
-	
+
 			if (item.getOwnerEmail() != null && !item.getOwnerEmail().equals("")) {
 
 				Double value = item.getValue();
-				
-				ResponseDTO dtoInternal = resultShared.get(item.getOwnerEmail()); 
-				
+
+				ResponseDTO dtoInternal = resultShared.get(item.getOwnerEmail());
+
 				if (dtoInternal != null) {
-	
+
 					dtoInternal.getItensList().add(item);
 					Double actualValue = dtoInternal.getSharedValueByOwner();
-					dtoInternal.setSharedValueByOwner(actualValue + value );
-					
+					dtoInternal.setSharedValueByOwner(actualValue + value);
+
 				} else {
-	
+
 					ArrayList<Item> list = new ArrayList<Item>();
 					list.add(item);
-					
-					dtoInternal = ResponseDTO.builder()
-							.itensList(list)
-							.sharedValueByOwner(item.getValue())
-							.build();
+
+					dtoInternal = ResponseDTO.builder().itensList(list).sharedValueByOwner(item.getValue()).build();
 				}
-				
+
 				resultShared.put(item.getOwnerEmail(), dtoInternal);
-				
+
 			} else {
 				System.out.println("isso nao eh de ninguem.. ou eh frete ou eh cupom");
 				System.out.println(item.toString());
 			}
 
 		}
-		
+
 		return resultShared;
-		
+
 	}
-	
+
 }

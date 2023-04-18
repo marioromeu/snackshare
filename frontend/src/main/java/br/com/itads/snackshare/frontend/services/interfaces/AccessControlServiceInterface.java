@@ -5,7 +5,8 @@ import br.com.itads.snackshare.frontend.services.GenericServiceInterface;
 
 /**
  * 
- * @author mario.s.junior
+ * @author marioromeu
+ * @email mario.romeu@gmail.com
  *
  */
 public interface AccessControlServiceInterface extends GenericServiceInterface<User> {
